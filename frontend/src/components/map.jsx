@@ -3,33 +3,36 @@ import React, { useState, useEffect } from 'react';
 
 // Leaflet Imports
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import L from 'leaflet';
+import L                                          from 'leaflet';
+
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-routing-machine';
 
 // CSS Styling
 import "../styles/map.css"
 
+// Import Photos
+import Loc1 from "../images/loc.png"
+import Loc2 from "../images/blue.png"
+
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
     iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
-    iconUrl: require('leaflet/dist/images/marker-icon.png'),
-    shadowUrl: require('leaflet/dist/images/marker-shadow.png')
+    iconUrl:       require('leaflet/dist/images/marker-icon.png'),
+    shadowUrl:     require('leaflet/dist/images/marker-shadow.png')
 });
 
 const Map = () => {
-    const [startPoint, setStartPoint] = useState([51.505, -0.09]);
-    const [endPoint, setEndPoint] = useState([51.51, -0.1]);
-    const [startPlace, setStartPlace] = useState('');
-    const [endPlace, setEndPlace] = useState('');
-
+    const [startPoint, setStartPoint]               = useState([51.505, -0.09]);
+    const [endPoint, setEndPoint]                   = useState([51.51, -0.1]);
+    const [startPlace, setStartPlace]               = useState('');
+    const [endPlace, setEndPlace]                   = useState('');
     const [routeInstructions, setRouteInstructions] = useState([]);
 
-    const [directions, setDirections] = useState([]);
 
     const geocodeAddress = async (address) => {
         const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`);
-        const data = await response.json();
+        const data     = await response.json();
         if (data.length > 0) {
             return [parseFloat(data[0].lat), parseFloat(data[0].lon)];
         }
@@ -56,20 +59,23 @@ const Map = () => {
                 ],
                 routeWhileDragging: true,
                 lineOptions: {
-                    styles: [{ color: '#6FA1EC', weight: 4 }]
+                    styles: [{ 
+                        color: '#6FA1EC', 
+                        weight: 4 
+                    }]
                 },
                 show: false,
                 addWaypoints: false,
                 fitSelectedRoutes: false,
                 showAlternatives: false,
-                createMarker: function() { return null; }, // Prevents creating markers
+                createMarker: function() { return null; }, 
                 router: new L.Routing.OSRMv1({
                     serviceUrl: 'https://router.project-osrm.org/route/v1'
                 })
             });
     
             routing.on('routesfound', (e) => {
-                const routes = e.routes;
+                const routes       = e.routes;
                 const instructions = routes[0].instructions.map(instruction => 
                     instruction.text
                 );
@@ -85,22 +91,42 @@ const Map = () => {
         <div className="map-container">
             <div className="map-side-box">
                 <form onSubmit={handleRouteSubmit}>
-                    <input
-                        type="text"
-                        placeholder="Enter start location"
-                        value={startPlace}
-                        onChange={(e) => setStartPlace(e.target.value)}
-                    />
-                    <input
-                        type="text"
-                        placeholder="Enter destination"
-                        value={endPlace}
-                        onChange={(e) => setEndPlace(e.target.value)}
-                    />
-                    <button type="submit">Find Route</button>
+
+                    <div className="input-box">
+                        <div className="icon-box">
+                            <img src={Loc1} className="location-icon"/>
+                        </div>
+
+                        <input
+                            type="text"
+                            placeholder="Enter start location"
+                            value={startPlace}
+                            onChange={(e) => setStartPlace(e.target.value)}
+                        />
+                    </div>
+
+
+                    <div className="input-box" style={{marginTop: "2vh"}}>
+                        <div className="icon-box">
+                            <img src={Loc2} className="location-icon" style={{width: "3vw"}}/>
+                        </div>
+
+                        <input
+                            type="text"
+                            placeholder="Enter destination"
+                            value={endPlace}
+                            onChange={(e) => setEndPlace(e.target.value)}
+                        />
+                    </div>
+
+
+                    <br />
+                    <br />
+
+                    <button type="submit" class="button-92">Find Route</button>
                 </form>
                 <div className="directions-container">
-                    <h3>Directions:</h3>
+                    <h3 style={{color: "black"}}>Directions:</h3>
                     <ul>
                         {routeInstructions.map((instruction, index) => (
                             <li key={index}>{instruction}</li>

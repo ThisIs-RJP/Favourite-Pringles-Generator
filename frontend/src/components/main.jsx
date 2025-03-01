@@ -41,7 +41,9 @@ function Main() {
                     </p1>
 
                     <br />
-                    <button class="button-24">Get tracking!!!</button>
+                    <a href="/map">
+                        <button class="button-24">Get tracking!!!</button>
+                    </a>
                 </div>
             
             </div>
