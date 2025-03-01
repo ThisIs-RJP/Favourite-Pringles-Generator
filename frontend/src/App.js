@@ -1,25 +1,46 @@
-import logo from './logo.svg';
+// Module Imports
+import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
+
+// Styles
 import './App.css';
 
+// Component Imports
+import Mobile from "./components/mobile";
+import Main   from "./components/main";
+
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const isMobile = () => {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+};
+
+const MobileView = () => {
+    return (
+        <div className="mobile-view">
+          <Mobile />
+        </div>
+    );
+};
+
+return (
+    <Router>
+        {isMobile() ? (
+            <MobileView />
+        ) : (
+            <Routes>
+                <Route path="/" element={
+                  <div>
+                    <Main />
+                  </div>
+                } />
+                <Route path="*" element={
+                    <div>
+                        {/* <NotFound /> */}
+                    </div>
+                } />
+            </Routes>
+        )}
+    </Router>
+  )
 }
 
 export default App;

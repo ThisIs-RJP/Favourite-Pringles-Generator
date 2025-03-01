@@ -1,0 +1,187 @@
+h1 {
+    font-weight: 500;
+}
+
+.main-page-container {
+    width: 100vw;
+    height: 100vh;
+
+    /* background-color: red; */
+
+    display: flex;
+
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.main-page-photo-container {
+    width: 35vw;
+    height: 100vh;
+
+    background-color: rgb(255, 255, 255);
+    /* background-color: red */
+
+    animation: reveal-photos 1s forwards;
+}
+
+@keyframes reveal-photos {
+    0% {
+        opacity: 0;
+        transform: translateX(-10%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0%);
+    }
+}
+
+.main-page-photo-container img {
+    position: absolute;
+}
+
+.main-page-photo-pringles {
+    width: 40%;
+    height: auto;
+
+    top: 30%;
+    left: 50%;
+
+    animation: bounce 2s ease-in-out infinite;
+}
+
+.main-page-photo-cheetos {
+    width: 40%;
+    height: auto;
+
+    top: 10%;
+    left: 3%;
+
+    animation: bounce 2s ease-in-out infinite;
+}
+
+.main-page-photo-taki {
+    width: 30%;
+    height: auto;
+
+    top: 60%;
+    left: 3%;
+
+    animation: bounce 2s ease-in-out infinite;
+}
+
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+
+.main-page-content-container {
+    width: 65vw;
+    height: 100vh;
+
+
+    /* background-color: yellow; */
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-page-content-text-container {
+    width: 85%;
+    height: 40%;
+
+    opacity: 0;
+
+    /* background-color: red; */
+
+    animation: 1s reveal-content-container forwards;
+    animation-delay: 0.6s;
+
+    max-width: 100%;
+    max-height: 100%;
+}
+
+@keyframes reveal-content-container {
+    0% {
+        opacity: 0;
+        transform: translateY(-10%);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.main-page-content-text-container h1 {
+    color: orange;
+}
+
+.vertical-line {
+    width: 2px;
+    height: 0;
+
+    background-color: orange;
+    margin-right: 10%;
+
+    animation: 1s startup-line forwards;
+    animation-delay: 0.3s
+}
+
+@keyframes startup-line {
+    0% {
+        height: 0vh;
+    }
+    100% {
+        height: 80vh;
+    }
+}
+
+/* 
+    Button inspiration from
+    https://getcssscan.com/css-buttons-examples
+*/
+
+.button-24 {
+  background: #FF4742;
+  border: 1px solid #FF4742;
+  border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-block;
+  font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 16px;
+  min-height: 40px;
+  outline: 0;
+  padding: 12px 14px;
+  text-align: center;
+  text-rendering: geometricprecision;
+  text-transform: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+
+  margin-top: 5%;
+  transition: 0.2s ease-in-out;
+}
+
+.button-24:hover, .button-24:active {
+  background-color: initial;
+  background-position: 0 0;
+  color: #FF4742;
+}
+
+.button-24:active {
+  opacity: .5;
+}
