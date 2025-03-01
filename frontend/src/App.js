@@ -7,6 +7,7 @@ import './App.css';
 // Component Imports
 import Mobile from "./components/mobile";
 import Main   from "./components/main";
+import Map    from "./components/map"
 
 function App() {
   const isMobile = () => {
@@ -30,6 +31,11 @@ return (
                 <Route path="/" element={
                   <div>
                     <Main />
+                  </div>
+                } />
+                <Route path="/map" element={
+                  <div>
+                    <Map />
                   </div>
                 } />
                 <Route path="*" element={
