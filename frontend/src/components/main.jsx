@@ -41,7 +41,7 @@ function Main() {
                     </p1>
 
                     <br />
-                    <button class="button-24" role="button">Get tracking!!!</button>
+                    <button class="button-24">Get tracking!!!</button>
                 </div>
             
             </div>
